@@ -493,7 +493,17 @@ The vault is at ~/Documents/Notes/Notes/
 CMDEOF
 ok "log-idea.md written"
 
-# ── 11. Obsidian AppImage ──────────────────────────────────────────────────────
+# ── 11. Agents ─────────────────────────────────────────────────────────────────
+info "Installing agents..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -d "$SCRIPT_DIR/agents" ]; then
+  cp "$SCRIPT_DIR/agents/"*.md ~/.claude/agents/
+  ok "$(ls "$SCRIPT_DIR/agents/"*.md | wc -l) agents installed"
+else
+  warn "agents/ directory not found next to setup.sh — skipping"
+fi
+
+# ── 12. Obsidian AppImage ──────────────────────────────────────────────────────
 info "Checking for Obsidian..."
 OBSIDIAN_VERSION="1.8.10"
 OBSIDIAN_APPIMAGE="$HOME/Applications/Obsidian-${OBSIDIAN_VERSION}.AppImage"
@@ -510,7 +520,7 @@ else
   ok "Obsidian downloaded to ~/Applications/"
 fi
 
-# ── 12. Final checklist ────────────────────────────────────────────────────────
+# ── 13. Final checklist ────────────────────────────────────────────────────────
 echo ""
 echo "=================================="
 echo "  Setup Complete"
@@ -521,6 +531,7 @@ ok "settings.json — model, hooks, plugins list"
 ok "obsidian-logger.py — session → Obsidian logging"
 ok "update-sub-agents.sh — agent index hook"
 ok "commands/log-idea.md — /log-idea command"
+ok "agents/ — $(ls ~/repos/claude-code-setup/agents/*.md 2>/dev/null | wc -l) subagents (pe, humanwriter, architect, etc.)"
 ok "Obsidian — AppImage present"
 echo ""
 echo -e "${YELLOW}Manual steps still required:${NC}"

@@ -16,6 +16,7 @@ Bootstrap script to replicate a full Claude Code environment on a new machine.
 | `/log-idea` command | log ideas/learnings to Obsidian from any session |
 | Obsidian AppImage | downloaded to `~/Applications/` |
 | Superpowers marketplace | cloned from your private `claude-config` repo |
+| `agents/` | 23 subagents — `@pe`, `@humanwriter`, `@architect`, `@researcher`, and more |
 
 ## Plugins installed on first Claude Code launch
 
